@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<context:annotation-config/>
+	
+	
+	<bean id="testController" class="spring.controller.TestController">
+		<constructor-arg ref="userDao"></constructor-arg>
+	</bean>
+	
+	<bean id="imgController" class="spring.controller.ImgController">
+		<constructor-arg ref="userDao"></constructor-arg>
+	</bean>
+	
+	<bean id="insertController" class="spring.controller.InsertController">
+		<constructor-arg ref="userDao"></constructor-arg>
+	</bean>
+	
+	<bean id="registerController" class="spring.controller.RegisterController">
+		<constructor-arg ref="userRegSvc"></constructor-arg>
+	</bean>
+	
+	<bean id="loginController" class="spring.controller.LoginController">
+		<constructor-arg ref="loginSvc"></constructor-arg>
+	</bean>
+	
+	<bean id="logoutController" class="spring.controller.LogoutController">
+	</bean>
+	
+	<!-- pwdSearchController추가 -->
+	<bean id="PwdSearchController" class="spring.controller.PwdSearchController">
+		<constructor-arg ref="userDao"></constructor-arg>
+	</bean>
+	
+</beans>
