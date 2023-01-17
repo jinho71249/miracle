@@ -1,0 +1,142 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+table {
+	border: 1px black solid;
+}
+
+tr {
+	border: 1px black solid;
+}
+
+td {
+	border: 1px black solid;
+}
+
+.space{
+	margin: 10px;
+}
+.btntd{
+	display: inline-flex;
+	justify-content: flex-end;
+	text-align: right;
+}
+
+</style>
+
+</head>
+<body>
+
+	<div>
+	<div class="space"></div>
+		<form:form action="commentWrite" modelAttribute="comment">
+			<!-- 댓글 등록 후 다시 이전 상세글로 돌아가기위한 -->
+			<input type="hidden" id="returnNum" name="returnNum" value="${returnNum}">
+			<table>
+				<tr>
+					<th>작성자</th>
+					<th>비밀번호</th>
+				</tr>
+				<tr>
+					<td>
+						<form:input path="com_Name"/>
+						<form:errors path="com_Name"/>
+					</td>
+					<td>
+						<form:password path="com_Pwd"/>
+						<form:errors path="com_Pwd"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<form:textarea path="com_Con" cols="70" rows="5"/>
+						<form:errors path="com_Con"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<button type="submit" name="commentBtn">등록</button>
+					</td>
+				</tr>
+			</table>
+		</form:form>
+
+
+		<c:if test="${!empty comments}">
+			<c:forEach items="${comments}" var="com" varStatus="index">
+				<div class="space"></div>
+				<form:form action="commentUpdate" modelAttribute="comment">
+					<table>
+						<tr>
+							<td colspan="2">
+								${com.com_Name}
+								<input type="hidden" name="com_Board_Num" value="${com.com_Board_Num}">
+								<input type="hidden" name="com_Ado_Num" value="${com.com_Ado_Num}">
+								<input type="hidden" name="com_Name" value="${com.com_Name}">
+								<input type="hidden" name="com_Pwd" value="${com.com_Pwd}">
+								<input type="hidden" name="com_Num" value="${com.com_Num}">
+								<input type="hidden" id="returnNum" name="returnNum" value="${returnNum}">
+							</td>
+						</tr> 
+						<tr>
+							<td colspan="2">
+								<textarea cols="70" id="${index.count}" name="com_Con" readonly>${com.com_Con}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="btntd">
+								비밀번호<input type="text" name="pwd" id="p${index.count}">
+								<button type="button" id="m${index.count}" onclick="modi(${index.count}, ${com.com_Pwd})">수정/삭제 비밀번호 확인</button>
+								<button type="submit" style="display: none;" id="s${index.count}" >수정</button>
+								<button type="button" style="display: none;" id="d${index.count}" onclick="location.href='commentDel?com_Num=${com.com_Num}&returnNum=${returnNum}'">삭제</button>
+							</td>
+						</tr> 
+					</table>
+				</form:form>
+			</c:forEach>
+		</c:if>
+		<table>
+			<c:if test="${empty comments}">
+				<tr>
+					<td>댓글없음</td>
+				</tr>
+			</c:if>
+		</table>
+	</div>
+	<script type="text/javascript">
+		function modi(area, pw){
+			let pwd=document.getElementById('p'+area);
+			if(pwd.value==pw){
+				alert('비밀번호가 확인되었습니다.');
+				let textarea=document.getElementById(area);
+				let modify=document.getElementById('m'+area);
+				let submit=document.getElementById('s'+area);
+				let del=document.getElementById('d'+area);
+			
+				textarea.readOnly=false;
+				modify.style.display="none"; 
+				submit.style.display="flex";
+				del.style.display="flex";
+			}
+			else{
+				alert('비밀번호가 일치하지않습니다');
+			}
+			
+			//글 수정할수있게 제출버튼 보이게 수정버튼 안보이게
+		}
+		
+	
+	</script>
+
+
+</body>
+</html>
