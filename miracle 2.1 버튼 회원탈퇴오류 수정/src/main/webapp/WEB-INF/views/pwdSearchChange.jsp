@@ -55,7 +55,7 @@
 		</div>
 		
 					
-		<button type="submit" name="searchPwdChange" class="w-100 btn btn-lg btn-primary">비밀번호 변경하기</button>
+		<button type="submit" name="searchPwdChange" class="w-100 btn btn-lg btn-secondary">비밀번호 변경하기</button>
 	
 	</form:form>
 </main>

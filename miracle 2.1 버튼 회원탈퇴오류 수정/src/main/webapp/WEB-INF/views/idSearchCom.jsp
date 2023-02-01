@@ -11,6 +11,7 @@
 	html,
 	body {
 	  height: 100%;
+	  background-image: url("/img/mainImg.jpg");
 	}
 	
 	body {
@@ -37,7 +38,7 @@
 	<div class="form-floating">
 		<p>고객님의 아이디는  <strong> ${user.user_Id} </strong> 입니다</p>
 	</div>
-	<button type="button" onclick="location.href='main?user_Admin=0'" class="w-100 btn btn-lg btn-primary">메인으로 돌아가기</button>
+	<button type="button" onclick="location.href='main?user_Admin=0'" class="w-100 btn btn-lg btn-secondary">메인으로 돌아가기</button>
 </main>
 
 	<jsp:include page="menu.jsp"></jsp:include>
