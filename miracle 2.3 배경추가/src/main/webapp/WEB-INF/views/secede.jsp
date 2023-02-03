@@ -68,7 +68,7 @@ body::before{
 		</div>
 		<br>
 		
-		<button type="submit" name="secedeBtn" class="w-100 btn btn-lg btn-primary"> 회원탈퇴하기</button>
+		<button type="submit" name="secedeBtn" class="w-100 btn btn-lg btn-secondary"> 회원탈퇴하기</button>
 		<br>
 
 </form:form>
